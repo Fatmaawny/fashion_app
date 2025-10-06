@@ -1,13 +1,16 @@
-import 'dart:convert';
+import 'package:fashion_app/models/product_model.dart';
 
-import 'package:http/http.dart' as http;
+import '../helper/api.dart';
 
 class GetAllCategoriesService {
   Future<List<dynamic>> getAllCategories() async {
-    http.Response response = await http.get(
-      Uri.parse("https://fakestoreapi.com/products/categories"),
+    List<dynamic> data = await Api().get(
+      url: 'https://fakestoreapi.com/products/categories',
     );
-    List<dynamic> data = jsonDecode(response.body);
-    return data;
+    List<dynamic> categories = [];
+    for (int i = 0; i <= data.length; i++) {
+      categories.add(ProductModel.fromJson(data[i]));
+    }
+    return categories;
   }
 }
