@@ -1,5 +1,4 @@
 import 'package:fashion_app/models/product_model.dart';
-
 import '../helper/api.dart';
 
 class GetAllCategoriesService {
