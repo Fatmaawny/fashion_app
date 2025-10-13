@@ -20,16 +20,45 @@ class Api {
     @required String? token,
   }) async {
     Map<String, String> Headers = {};
-    if (token == null) {
-      Headers.addAll({'Authorization': 'Bearer $token '});
-    } else {
-      Headers.addAll(Headers);
-
-      http.Response response = await http.post(Uri.parse(url), body: body,
-      headers: Headers);
+    if (token != null) {
+      Headers.addAll({'Authorization': 'Bearer $token'});
+    }
+    http.Response response = await http.post(
+      Uri.parse(url),
+      body: body,
+      headers: Headers,
+    );
+    if (response.statusCode == 201) {
       Map<String, dynamic> data = jsonDecode(response.body);
-        return data;
-
+      print(data);
+      return data;
+    } else {
+      throw Exception(
+        'there is an error with status code ${response.statusCode}',
+      );
+    }
+  }Future<dynamic> posttt({
+    required String url,
+    @required dynamic body,
+    @required String? token,
+  }) async {
+    Map<String, String> Headers = {};
+    if (token != null) {
+      Headers.addAll({'Authorization': 'Bearer $token'});
+    }
+    http.Response response = await http.post(
+      Uri.parse(url),
+      body: body,
+      headers: Headers,
+    );
+    if (response.statusCode == 201) {
+      Map<String, dynamic> data = jsonDecode(response.body);
+      print(data);
+      return data;
+    } else {
+      throw Exception(
+        'there is an error with status code ${response.statusCode}& the body is ${response.body}',
+      );
     }
   }
 }

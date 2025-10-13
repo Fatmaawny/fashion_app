@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import '../helper/api.dart';
+
 class SigninPage extends StatelessWidget {
   const SigninPage({super.key});
-static String id ="signin";
+  static String id = "signin";
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-
+    return Scaffold(
       body: Center(
-        child:IconButton(
-          onPressed: ()async {
-            http.Response responce = await http.post(Uri.parse("https://fakestoreapi.com/products"),
-              body:{
-              'title': 'test product',
-              'price': '13.5',
-              'description': 'lorem ipsum set',
-              'image': 'https://i.pravatar.cc',
-              'category': 'electronic',
-            },
-            headers:{
-              'Accept':'application/json',
-              'Content-Type':'application/x-www-form-urlencoded'
-            }
+        child: IconButton(
+          onPressed: () {
+            Api().post(
+              url: 'https://fakestoreapi.com/products',
+              body: {
+                'title': 'shoes',
+                'price': '200',
+                'description': 'sneakers women shoes',
+                'image':
+                    'https://i.pinimg.com/736x/22/a7/b3/22a7b3bb26d758dcf3205cb28dcec070.jpg',
+                'category': 'women\'s clothing',
+              },
             );
-            print(responce.body);
-          }, icon:Icon( Icons.add),
-
-      ))
+          },
+          icon: Icon(Icons.add),
+        ),
+      ),
     );
   }
 }
