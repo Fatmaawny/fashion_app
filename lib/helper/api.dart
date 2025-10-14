@@ -34,10 +34,11 @@ class Api {
       return data;
     } else {
       throw Exception(
-        'there is an error with status code ${response.statusCode}',
-      );
+        'there is an error with status code ${response.statusCode} & the body is ${response.body}' );
     }
-  }Future<dynamic> posttt({
+  }
+
+  Future<dynamic> put({
     required String url,
     @required dynamic body,
     @required String? token,
@@ -46,7 +47,7 @@ class Api {
     if (token != null) {
       Headers.addAll({'Authorization': 'Bearer $token'});
     }
-    http.Response response = await http.post(
+    http.Response response = await http.put(
       Uri.parse(url),
       body: body,
       headers: Headers,
